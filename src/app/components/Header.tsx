@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -9,25 +11,30 @@ export default function Header() {
         <Tabs defaultValue="account" className="p-2 bg-slate-100 rounded-md">
           <TabsList>
             <TabsTrigger
-              className="pt-3 pb-3 px-4 py-4 focus:bg-white"
-              value="account"
+              className="pt-3 pb-3 px-4 py-4 focus:bg-white focus:border-none"
+              value="Esporte"
             >
               Esporte
             </TabsTrigger>
             <TabsTrigger
-              className="pt-3 pb-3 px-4 py-4 focus:bg-white"
-              value="password"
+              className="pt-3 pb-3 px-4 py-4 focus:bg-white focus:border-none"
+              value="Politica"
             >
               Política
             </TabsTrigger>
             <TabsTrigger
-              className="pt-3 pb-3 px-4 py-4 focus:bg-white"
-              value="password"
+              className="pt-3 pb-3 px-4 py-4 focus:bg-white focus:border-none"
+              value="Clima"
             >
               Clima
             </TabsTrigger>
           </TabsList>
         </Tabs>
+        <div className="flex justify-end">
+          <Link href="/login">
+            <Button className="bg-black text-white">Login</Button>
+          </Link>
+        </div>
       </div>
     </header>
   );
