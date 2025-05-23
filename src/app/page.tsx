@@ -1,9 +1,9 @@
-import Header from "./components/Header";
+import NewsEsporte from "./components/newsEsporte";
 
 export default function Home() {
   return (
     <div>
-      <Header />
+      <NewsEsporte />
     </div>
   );
 }

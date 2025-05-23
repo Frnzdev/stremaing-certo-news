@@ -2,19 +2,33 @@ export type Artigos = {
   title: string;
   description: string;
   url: string;
-  ImageUrl: string;
+  image_url: string;
+  pubDate: string;
+  pubDateTZ: string;
 };
 
-export async function getNews() {
-  const reponse = await fetch(
-    "https://newsdata.io/api/1/archive?apikey=pub_7cb1233e86614bde8dfba325752b04f6"
-  );
+export type PropsNews = {
+  typeNews: string;
+};
+
+export async function getNews({ typeNews }: PropsNews): Promise<Artigos[]> {
   try {
-    if (!reponse.ok) {
-      throw new Error("erro ao buscar dados");
+    const response = await fetch(
+      `https://newsdata.io/api/1/latest?apikey=pub_7cb1233e86614bde8dfba325752b04f6&q=${encodeURIComponent(
+        typeNews
+      )}&language=pt`
+    );
+
+    if (!response.ok) {
+      throw new Error("Erro ao buscar dados da API.");
     }
+
+    const data = await response.json();
+
+    // Validação e retorno seguro dos artigos
+    return Array.isArray(data.results) ? data.results : [];
   } catch (error) {
-    console.error("erros ao buscar dados", error);
+    console.error("Erro ao buscar dados:", error);
+    return [];
   }
-  return reponse.json();
 }

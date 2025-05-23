@@ -10,29 +10,37 @@ export default function Header() {
         <Image src="/conecta.png" alt="Logo" width={240} height={39} />
         <Tabs defaultValue="Esporte" className="p-2 bg-slate-100 rounded-md">
           <TabsList>
-            <TabsTrigger
-              className="pt-3 pb-3 px-4 py-4 focus:bg-white focus:border-none"
-              value="Esporte"
-            >
-              Esporte
-            </TabsTrigger>
-            <TabsTrigger
-              className="pt-3 pb-3 px-4 py-4 focus:bg-white focus:border-none"
-              value="Politica"
-            >
-              Política
-            </TabsTrigger>
-            <TabsTrigger
-              className="pt-3 pb-3 px-4 py-4 focus:bg-white focus:border-none"
-              value="Clima"
-            >
-              Clima
-            </TabsTrigger>
+            <Link href={"/"}>
+              <TabsTrigger
+                className="pt-3 pb-3 px-4 py-4 focus:bg-white focus:border-none"
+                value="Esporte"
+              >
+                Esporte
+              </TabsTrigger>
+            </Link>
+            <Link href={}>
+              <TabsTrigger
+                className="pt-3 pb-3 px-4 py-4 focus:bg-white focus:border-none"
+                value="Politica"
+              >
+                Política
+              </TabsTrigger>
+            </Link>
+            <Link href={"/"}>
+              <TabsTrigger
+                className="pt-3 pb-3 px-4 py-4 focus:bg-white focus:border-none"
+                value="Clima"
+              >
+                Clima
+              </TabsTrigger>
+            </Link>
           </TabsList>
         </Tabs>
         <div className="flex justify-end">
           <Link href="/login">
-            <Button className="bg-black text-white">Login</Button>
+            <Button className="bg-black text-white hover:cursor-pointer">
+              Login
+            </Button>
           </Link>
         </div>
       </div>
