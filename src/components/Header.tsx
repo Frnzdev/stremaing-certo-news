@@ -18,7 +18,7 @@ export default function Header() {
                 Esporte
               </TabsTrigger>
             </Link>
-            <Link href={}>
+            <Link href={"/"}>
               <TabsTrigger
                 className="pt-3 pb-3 px-4 py-4 focus:bg-white focus:border-none"
                 value="Politica"

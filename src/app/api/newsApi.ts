@@ -1,62 +1,29 @@
-// src/api/newsApi.ts
-
-export type Artigos = {
+export interface NewsProps {
   title: string;
-  description: string;
-  url: string;
-<<<<<<< HEAD
-  image_url: string; // nome conforme retornado pela API
-};
-
-export async function getNews(): Promise<Artigos[]> {
-  try {
-    const response = await fetch(
-      "https://newsdata.io/api/1/latest?apikey=pub_7cb1233e86614bde8dfba325752b04f6&q=Futebol&country=br"
-    );
-
-    if (!response.ok) {
-      throw new Error("Erro ao buscar dados");
-    }
-
-    const data = await response.json();
-    console.log("Resposta da API:", data);
-
-    if (!Array.isArray(data.results)) {
-      throw new Error("Formato inesperado: 'results' não é um array");
-    }
-
-    return data.results as Artigos[];
-  } catch (error) {
-    console.error("Erro ao buscar notícias:", error);
-=======
   image_url: string;
+  description: string;
   pubDate: string;
-  pubDateTZ: string;
-};
+  url: string; // Added url property
+}
 
-export type PropsNews = {
-  typeNews: string;
-};
+export interface ApiResponse {
+  results: NewsProps[];
+}
 
-export async function getNews({ typeNews }: PropsNews): Promise<Artigos[]> {
-  try {
-    const response = await fetch(
-      `https://newsdata.io/api/1/latest?apikey=pub_7cb1233e86614bde8dfba325752b04f6&q=${encodeURIComponent(
-        typeNews
-      )}&language=pt`
-    );
+export async function fetchNews(): Promise<NewsProps[]> {
+  const response = await fetch(
+    "https://newsdata.io/api/1/latest?apikey=pub_7cb1233e86614bde8dfba325752b04f6&q=Futebol",
+    { next: { revalidate: 3600 } } // Revalidate data every hour (3600 seconds)
+  );
 
-    if (!response.ok) {
-      throw new Error("Erro ao buscar dados da API.");
-    }
-
-    const data = await response.json();
-
-    // Validação e retorno seguro dos artigos
-    return Array.isArray(data.results) ? data.results : [];
-  } catch (error) {
-    console.error("Erro ao buscar dados:", error);
->>>>>>> d149037a09bf009e31c7505af75cd8a5e7736512
-    return [];
+  if (!response.ok) {
+    // It's good practice to log or handle the error more gracefully in a real app
+    console.error("Failed to fetch news:", response.statusText);
+    throw new Error("Erro ao buscar notícias");
   }
+
+  const data: ApiResponse = await response.json();
+
+  // Return only the results array
+  return data.results;
 }
