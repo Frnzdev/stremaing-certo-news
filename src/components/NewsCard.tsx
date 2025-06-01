@@ -6,7 +6,7 @@ interface NewsCardProps {
   image_url?: string; // Optional, as it might not always be present
   description?: string; // Optional
   pubDate?: string; // Optional
-  url: string;
+  url?: string;
 }
 
 export default function NewsCard({
